@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+  backend:
+    build: ./todobe
+    container_name: fastapi_backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./todobe:/app
+    depends_on:
+      - frontend
+
+  frontend:
+    build: ./todofe
+    container_name: vue_frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./todofe:/app
+      - /app/node_modules
+    command: npm run dev
+    stdin_open: true
+    tty: true
