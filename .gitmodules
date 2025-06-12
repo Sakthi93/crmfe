@@ -1,6 +1,0 @@
-[submodule "todofe"]
-	path = todofe
-	url = https://github.com/Sakthi93/todo.git
-[submodule "todobe"]
-	path = todobe
-	url = https://github.com/Sakthi93/todobe.git
