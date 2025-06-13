@@ -1,4 +1,14 @@
 @import './base.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  @apply bg-white text-black min-h-screen;
+  margin: 50%;
+  padding: 0;
+}
 
 #app {
   max-width: 1280px;

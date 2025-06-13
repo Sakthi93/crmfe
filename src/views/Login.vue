@@ -1,42 +1,34 @@
 <template>
-    <div class="login">
-        <h2>Login</h2>
-        <form @submit.prevent="login">
-            <input v-model="username" placeholder="Username" required />
-            <input v-model="password" type="password" placeholder="Password" required />
-            <button type="submit">Login</button>
-        </form>
-        <p v-if="error">{{ error }}</p>
+    <div class="min-h-screen flex items-center justify-center bg-white text-black">
+        <div class="w-full max-w-sm p-6 bg-white rounded-lg shadow-md">
+            <h2 class="text-2xl font-bold mb-6 text-center">Login to Your Account</h2>
+            <form @submit.prevent="login" class="space-y-4">
+                <input v-model="username" type="text" placeholder="Username" required
+                    class="w-full px-4 py-2 border rounded-md" />
+                <input v-model="password" type="password" placeholder="Password" required
+                    class="w-full px-4 py-2 border rounded-md" />
+                <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600">
+                    Login
+                </button>
+            </form>
+            <p class="text-sm text-center mt-4">
+                Don't have an account?
+                <a href="/signup" class="text-blue-600 hover:underline">Sign up</a>
+            </p>
+            <p v-if="error" class="text-red-500 text-sm mt-2 text-center">{{ error }}</p>
+        </div>
     </div>
 </template>
 
-<script>
-import axios from 'axios'
-import { useRouter } from 'vue-router'
 
-export default {
-    setup() {
-        const router = useRouter()
-        const username = ref('')
-        const password = ref('')
-        const error = ref(null)
+<script setup>
+import { ref } from 'vue'
 
-        const login = async () => {
-            try {
-                const response = await axios.post('login/', {
-                    username: username.value,
-                    password: password.value
-                })
-                localStorage.setItem('access_token', response.data.access)
-                localStorage.setItem('refresh_token', response.data.refresh)
-                axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.access}`
-                router.push('/home')
-            } catch (err) {
-                error.value = 'Invalid username or password'
-            }
-        }
+const username = ref('')
+const password = ref('')
+const error = ref('')
 
-        return { username, password, login, error }
-    }
+function login() {
+    // your login logic
 }
 </script>
